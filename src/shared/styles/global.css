@@ -1,0 +1,23 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    height: 100dvh;
+}
+
+body {
+    height: inherit;
+    margin: 0;
+    padding: 0;
+
+    font-family: "Inter", sans-serif;
+}
+
+#root {
+    height: inherit;
+}
+
+a {
+    color: inherit;
+}
