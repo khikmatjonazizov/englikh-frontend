@@ -1,13 +1,13 @@
-import React, {Suspense} from 'react'
-import ReactDOM from 'react-dom/client'
-import {RouterProvider} from "react-router-dom";
-import {Provider} from "react-redux";
+import React, { Suspense } from 'react';
+import ReactDOM from 'react-dom/client';
+import { Provider } from 'react-redux';
 
 
-import '@/shared/styles/entry.css'
-import {appStore} from "./appStore.ts";
-import {appRouter} from "./appRouter.tsx";
-import {Loader} from "@/shared/ui/Loader";
+import '@/shared/styles/entry.css';
+import { appStore } from './appStore.ts';
+import { AppRouter } from './appRouter.tsx';
+import { Loader } from '@/shared/ui/Loader';
+import { AppContextProvider } from './appContextProvider.tsx';
 
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
@@ -15,11 +15,13 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         <Provider store={appStore}>
             <Suspense
                 fallback={
-                    <Loader containerStyle={{height: '100dvh'}} iconStyle={{fontSize: '50px'}}/>
+                    <Loader containerStyle={{ height: '100dvh' }} iconStyle={{ fontSize: '50px' }} />
                 }
             >
-                <RouterProvider router={appRouter()}/>
+                <AppContextProvider>
+                    <AppRouter />
+                </AppContextProvider>
             </Suspense>
         </Provider>
     </React.StrictMode>,
-)
+);

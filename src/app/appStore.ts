@@ -1,16 +1,21 @@
 import {configureStore} from '@reduxjs/toolkit'
+import {setupListeners} from '@reduxjs/toolkit/query'
 
-import {rootReducer} from "./appReducers.ts";
+import {rootReducer} from "@/app/appReducers";
+import {sessionApi} from '@/entities/session/api/sessionApi.ts'
 
-export const makeStore = () => configureStore({
+const middlewares = [sessionApi.middleware];
+
+export const appStore = configureStore({
     reducer: rootReducer,
-    middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware({
+    middleware: (getDefaultMiddleware) => {
+        return getDefaultMiddleware({
             serializableCheck: false,
-        }),
+        }).concat(middlewares);
+    }
 })
 
-export const appStore = makeStore()
+setupListeners(appStore.dispatch)
 
-export type RootState = ReturnType<typeof appStore.getState>
 export type AppDispatch = typeof appStore.dispatch
+export type RootState = ReturnType<typeof appStore.getState>

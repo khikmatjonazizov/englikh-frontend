@@ -1,3 +1,3 @@
-import {Error} from './ui/error.tsx'
+import {Error} from './ui'
 
 export default Error;
